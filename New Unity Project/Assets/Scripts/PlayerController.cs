@@ -13,14 +13,17 @@ public class PlayerController : MonoBehaviour
 
     // Private varibales
     private Rigidbody2D rb;
+    private Health health;
     private float moveInput;
     private float jumpInput;
     private bool facingRight = false;
     private bool grounded;
 
+    // Unity functions
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
     }
 
     private void Update()
@@ -29,8 +32,13 @@ public class PlayerController : MonoBehaviour
         jumpInput = Input.GetAxisRaw("Jump");
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
+        if (Input.GetKeyDown("r"))
+        {
+            health.TakeDamage(10);
+        }
+
         if (!facingRight && moveInput < 0)
-            Flip();
+            Flip(); 
 
         else if (facingRight && moveInput > 0)
             Flip();
@@ -44,6 +52,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
     }
 
+    // Private functions
     private void Flip()
     {
         facingRight = !facingRight;
