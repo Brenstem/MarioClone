@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(moveInput, rb.velocity.y);
 
-        if (jumpInput == 1 && grounded)
+        if (jumpInput == 1)
         {
             Debug.Log("can jump");
             rb.velocity = Vector2.up * jumpForce;
