@@ -10,7 +10,6 @@ public class Health : MonoBehaviour
     // Properties
     public int hp { get { return healthPoints; } set { healthPoints = value; } }
 
-
     // Function for making the player take damage
     public void TakeDamage(int dmg)
     {

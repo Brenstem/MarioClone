@@ -42,20 +42,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            GameObject player = hitInfo.gameObject;
-            player.GetComponent<Health>().TakeDamage(damage);
-
-            if (player.GetComponent<Transform>().position.x < transform.position.x)
-            {
-                player.GetComponent<Rigidbody2D>().MovePosition(Vector2.left);
-            }
-            else if (player.GetComponent<Transform>().position.x > transform.position.x)
-            {
-                Debug.Log("meme");
-
-                player.GetComponent<Rigidbody2D>().MovePosition(Vector2.right);
-            }
-            
+            hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
         }
     }
 
@@ -72,11 +59,4 @@ public class EnemyController : MonoBehaviour
     {
         moveDir = -moveDir;
     }
-
-    private void KnockBack()
-    {
-
-    }
-
-
 }
