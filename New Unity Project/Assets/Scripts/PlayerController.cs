@@ -26,10 +26,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal") * speed;
-        jumpInput = Input.GetAxisRaw("Jump") * jumpForce;
+        jumpInput = Input.GetAxisRaw("Jump");
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-
-        Debug.Log(grounded);
 
         if (!facingRight && moveInput < 0)
             Flip();
@@ -42,11 +40,8 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(moveInput, rb.velocity.y);
 
-        if (jumpInput == 1)
-        {
-            Debug.Log("can jump");
+        if (jumpInput == 1 && grounded)
             rb.velocity = Vector2.up * jumpForce;
-        }
     }
 
     private void Flip()
