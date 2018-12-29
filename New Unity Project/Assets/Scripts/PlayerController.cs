@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Serialized variables
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] float speed;
+    [SerializeField] int damage;
+    [SerializeField] float jumpForce;
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius;
@@ -43,6 +44,14 @@ public class PlayerController : MonoBehaviour
 
         if (jumpInput == 1 && grounded)
             rb.velocity = Vector2.up * jumpForce;
+    }
+
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        if (hitInfo.gameObject.CompareTag("Enemy"))
+        {
+            hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
     }
 
     // Private functions
