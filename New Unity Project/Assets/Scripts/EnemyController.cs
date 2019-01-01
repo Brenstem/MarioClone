@@ -45,16 +45,21 @@ public class EnemyController : MonoBehaviour
         rb.velocity = new Vector2(moveDir * speed, rb.velocity.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        /*if (!hitInfo.gameObject.CompareTag("Player"))
-        { 
-            ChangeDirection();
-        }
-        else
+        if (hitInfo.gameObject.CompareTag("Player"))
         {
             hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
-        }*/
+
+            if (hitInfo.transform.position.x < transform.position.x)
+            {
+                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(true);
+            }
+            else if (hitInfo.transform.position.x > transform.position.x)
+            {
+                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(false);
+            }
+        }
     }
 
     // Private functions
