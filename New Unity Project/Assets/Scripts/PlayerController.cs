@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     // Serialized variables
     [SerializeField] float speed;
-    [SerializeField] int damage;
     [SerializeField] float jumpForce;
 
     [SerializeField] LayerMask whatIsGround;
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private float knockbackTimer;
     private bool knockedFromRight;
-
 
     // Unity functions
     private void Start()
@@ -67,14 +65,6 @@ public class PlayerController : MonoBehaviour
 
         if (jumpInput == 1 && grounded)
             rb.velocity = Vector2.up * jumpForce;
-    }
-
-    private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        if (hitInfo.gameObject.CompareTag("Enemy"))
-        {
-            hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
-        }
     }
 
     // Private functions
