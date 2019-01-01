@@ -7,11 +7,15 @@ public class EnemyController : MonoBehaviour
     // Serialize variables
     [SerializeField] float speed;
     [SerializeField] int damage;
+    [SerializeField] LayerMask whatIsWall;
+    [SerializeField] Transform wallCheck;
+    [SerializeField] float wallCheckRadius;
 
     // Private variables
     private Rigidbody2D rb;
     private float moveDir;
     private bool facingRight;
+    private bool hittingWall;
 
     // Unity functions
     void Start()
@@ -22,6 +26,13 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        hittingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
+
+        if (hittingWall)
+        {
+            ChangeDirection();
+        }
+
         if (!facingRight && moveDir > 0)
             Flip();
 
@@ -36,14 +47,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        if (!hitInfo.gameObject.CompareTag("Player"))
+        /*if (!hitInfo.gameObject.CompareTag("Player"))
         { 
             ChangeDirection();
         }
         else
         {
             hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
-        }
+        }*/
     }
 
     // Private functions
