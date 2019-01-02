@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveDir = -1;
+        moveDir = 1;
     }
 
     private void Update()
@@ -36,8 +36,8 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        if (!hitInfo.gameObject.CompareTag("Player"))
-        { 
+        if (hitInfo.gameObject.CompareTag("Wall"))
+        {
             ChangeDirection();
         }
         else
