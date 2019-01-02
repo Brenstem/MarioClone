@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class StatePatternPlayer : MonoBehaviour
 {
-    public ParticleSystem BigPlayerEffect;
-    public ParticleSystem InvincibleEffect;
-    public ParticleSystem CanShootEffect;
+    // Serialized variables
+    [SerializeField] private ParticleSystem bigPlayerEffect;
+    [SerializeField] private ParticleSystem invincibleEffect;
+    [SerializeField] private ParticleSystem canShootEffect;
 
+    // Properties
     private IPowerupState mCurrentState;
     public IPowerupState CurrentState { get { return mCurrentState; } set { mCurrentState = value; } }
+    public ParticleSystem BigPlayerEffect { get { return bigPlayerEffect; } set { bigPlayerEffect = value; } }
+    public ParticleSystem InvincibleEffect { get { return invincibleEffect; } set { invincibleEffect = value; } }
+    public ParticleSystem CanShootEffect { get { return canShootEffect; } set { canShootEffect = value; } }
     private BigState mBigState;
     public BigState BigState { get { return mBigState; } set { mBigState = value; } }
     private NormalState mNormalState;
@@ -19,9 +24,7 @@ public class StatePatternPlayer : MonoBehaviour
     private InvincibleState mInvincibleState;
     public InvincibleState InvincibleState { get { return mInvincibleState; } set { mInvincibleState = value; } }
 
-    [HideInInspector] public float initXSize;
-    [HideInInspector] public float initYSize;
-
+    // Unity functions
     private void Awake()
     {
         NormalState = new NormalState(this);
@@ -34,17 +37,20 @@ public class StatePatternPlayer : MonoBehaviour
     {
         GetComponent<Transform>().localScale = new Vector2(GetComponent<Transform>().localScale.x, GetComponent<Transform>().localScale.y) * 1.5f;
 
-        initXSize = GetComponent<Transform>().localScale.x;
-        initYSize = GetComponent<Transform>().localScale.y;
-
         CurrentState = NormalState;
     }
 
     private void Update()
     {
         CurrentState.PowerupEffect();
+
+        if (CurrentState != NormalState)
+        {
+            NormalState.Running = true;
+        }
     }
 
+    // Public function
     public void ToBigPlayer()
     {
         CurrentState = BigState;
@@ -58,6 +64,7 @@ public class StatePatternPlayer : MonoBehaviour
     public void ToNormalPlayer()
     {
         CurrentState = NormalState;
+        Debug.Log("To normal state");
     }
 
     public void ToShootingPlayer()

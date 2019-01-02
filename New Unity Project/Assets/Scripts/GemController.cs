@@ -2,28 +2,31 @@
 
 public class GemController : MonoBehaviour
 {
-    enum Powerup
+    // Enums
+    enum Powerups
     {
         Shoot,
         Invincible,
         Big
-    }
+    } // all different available powerups
 
-    [SerializeField] Powerup currentPowerup;
+    // Serialized variables
+    [SerializeField] Powerups currentPowerup;
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
+    // Unity function
+    private void OnTriggerEnter2D(Collider2D hitInfo) // Switches the player state to the corresponding powerup state
     {
         if (hitInfo.gameObject.CompareTag("Player"))
         {
             switch (currentPowerup)
             {
-                case Powerup.Shoot:
+                case Powerups.Shoot:
                     hitInfo.GetComponent<StatePatternPlayer>().ToShootingPlayer();
                     break;
-                case Powerup.Invincible:
+                case Powerups.Invincible:
                     hitInfo.GetComponent<StatePatternPlayer>().ToInvinciblePlayer();
                     break;
-                case Powerup.Big:
+                case Powerups.Big:
                     hitInfo.GetComponent<StatePatternPlayer>().ToBigPlayer();
                     break;
                 default:

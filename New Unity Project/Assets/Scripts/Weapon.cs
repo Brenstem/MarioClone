@@ -8,17 +8,27 @@ public class Weapon : MonoBehaviour
     [SerializeField] float fireRate;
     [SerializeField] bool autoFire;
 
+    // Properties
     private bool mCanFire = false;
-    public bool canFire { get { return mCanFire; } set { mCanFire = value; } }
+    public bool CanFire { get { return mCanFire; } set { mCanFire = value; } }
 
     // private variables
     private float fireTimer = 0;
     private Vector2 firePosition;
 
+    // Unity functions
+    private void Update()
+    {
+        if (CanFire)
+        {
+            Shoot();
+        }
+    }
+
     // Instantiates bullets at firepoint if it's been long enough since the last shot
     public void Shoot()
     {
-        if (canFire)
+        if (CanFire)
         {
             fireTimer += Time.deltaTime;
             float fire = Input.GetAxisRaw("Fire1");

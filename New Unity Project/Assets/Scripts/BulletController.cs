@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    // Serialized variables
     [SerializeField] float lifeLength;
+    [SerializeField] float speed;
 
+    // Private variables
     private Rigidbody2D rb;
     private PlayerController player;
     private float lifeTimer;
 
+    // Unity functions
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -18,11 +22,11 @@ public class BulletController : MonoBehaviour
 
         if (player.FacingRight)
         {
-            rb.velocity = Vector2.left;
+            rb.velocity = Vector2.left * speed;
         }
         else if (!player.FacingRight)
         {
-            rb.velocity = Vector2.right;
+            rb.velocity = Vector2.right * speed;
         }
 
     }
@@ -37,11 +41,12 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.gameObject.CompareTag("Enemy"))
         {
-            hitInfo.gameObject.GetComponent<Health>().TakeDamage(player.Damage);
+            hitInfo.gameObject.GetComponent<Health>().TakeDamage(player.BulletDamage);
+            Destroy(this.gameObject);
         }
         else
         {

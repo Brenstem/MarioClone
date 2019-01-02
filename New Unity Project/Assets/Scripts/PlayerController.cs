@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     // Serialized variables
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
-    [SerializeField] int mDamage;
+    [SerializeField] int bulletDamage;
 
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] Transform groundCheck;
@@ -17,37 +17,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float knockbackLength;
     [SerializeField] int extraJumps;
 
-    private bool mCanFire = false;
-    public bool CanFire { get { return mCanFire; } set { mCanFire = value; } }
+    // Properties
+    private bool canFire = false;
+    public bool CanFire { get { return canFire; } set { canFire = value; } }
+    private bool facingRight;
+    public bool FacingRight { get { return facingRight; } set { facingRight = value; } }
+    public int BulletDamage { get { return bulletDamage; } }
 
     // Private varibales
     private Rigidbody2D rb;
-    private Weapon weapon; 
     private float moveInput;
-    private bool mFacingRight;
-    public int Damage { get { return mDamage; } }
-    public bool FacingRight { get { return mFacingRight; } set { mFacingRight = value; } }
     private bool grounded;
-
     private float knockbackTimer;
     private bool knockedFromRight;
     private int jumpsLeft;
-
 
     // Unity functions
     private void Start()
     {
         jumpsLeft = extraJumps;
         rb = GetComponent<Rigidbody2D>();
-        weapon = GetComponent<Weapon>();
     }
 
     private void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal") * speed;
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-
-        weapon.Shoot();
 
         if (!FacingRight && moveInput < 0)
             Flip(); 

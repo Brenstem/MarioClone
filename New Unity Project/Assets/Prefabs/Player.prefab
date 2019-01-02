@@ -86,7 +86,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.03}
+  m_Size: {x: 0.06, y: 0.03}
   m_EdgeRadius: 0
 --- !u!114 &1486958427
 MonoBehaviour:
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  force: 5
 --- !u!1 &1506907078
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13540973, y: 0.1118812}
+  m_Size: {x: 0.12983185, y: 0.1118812}
   m_EdgeRadius: 0
 --- !u!114 &7038418798709606340
 MonoBehaviour:
@@ -302,9 +303,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheck: {fileID: 1506907079}
-  groundCheckRadius: 0.005
+  groundCheckRadius: 0.003
   knockbackForce: 5
   knockbackLength: 0.02
+  extraJumps: 2
 --- !u!114 &7038418798709606342
 MonoBehaviour:
   m_ObjectHideFlags: 0

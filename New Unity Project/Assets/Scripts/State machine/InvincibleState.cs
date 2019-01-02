@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class InvincibleState : IPowerupState
 {
+    // Private variables
     private readonly StatePatternPlayer player;
-    private bool running = true;
     private ParticleSystem ps;
+    private bool running = true;
     private float powerupTimer;
     private int powerupLength = 5;
 
+    // Constructor
     public InvincibleState(StatePatternPlayer p)
     {
         player = p;
     }
 
+    // Active function
     public void PowerupEffect()
     {
         powerupTimer += Time.deltaTime;
 
-        while (running)
+        while (running) // Runs once on state activation
         {
             player.GetComponent<Health>().CanDie = false;
             ps = GameObject.Instantiate(player.InvincibleEffect, player.transform.position, Quaternion.identity);
@@ -28,35 +31,17 @@ public class InvincibleState : IPowerupState
 
         ps.transform.position = player.transform.position;
 
-        if (powerupTimer > powerupLength)
+        if (powerupTimer > powerupLength) // Exit conditions
         {
             ToNormalPlayer();
+            running = true;
             GameObject.Destroy(ps);
         }
     }
 
-    public void PowerupExpiration()
-    {
-
-    }
-
-    public void ToBigPlayer()
-    {
-        player.CurrentState = player.BigState;
-    }
-
-    public void ToInvinciblePlayer()
-    {
-        Debug.Log("Can't transition to same state");
-    }
-
+    // Return function
     public void ToNormalPlayer()
     {
         player.CurrentState = player.NormalState;
-    }
-
-    public void ToShootingPlayer()
-    {
-        player.CurrentState = player.ShootingState;
     }
 }

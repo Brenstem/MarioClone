@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class BigState : IPowerupState
 {
+    // Private variables
     private readonly StatePatternPlayer player;
     private ParticleSystem ps;
-    bool running = true;
+    private bool running = true;
 
+    // Constructor
     public BigState(StatePatternPlayer p)
     {
         player = p;
     }
 
+    // Active function
     public void PowerupEffect()
     {
-        while (running)
+        while (running) // Runs once on state activation
         {
             Transform pTransform = player.GetComponent<Transform>();
 
@@ -28,32 +31,17 @@ public class BigState : IPowerupState
 
         ps.transform.position = player.transform.position;
 
-
-        if (player.GetComponent<Health>().hp == 1)
+        if (player.GetComponent<Health>().hp == 1) // Exit condition
         {
             ToNormalPlayer();
+            running = true;
             GameObject.Destroy(ps);
         }
     }
 
-
-    public void ToBigPlayer()
-    {
-        Debug.Log("Can't transition to same state");
-    }
-
-    public void ToInvinciblePlayer()
-    {
-        player.CurrentState = player.InvincibleState;
-    }
-
+    // Exit function
     public void ToNormalPlayer()
     {
         player.CurrentState = player.NormalState;
-    }
-
-    public void ToShootingPlayer()
-    {
-        player.CurrentState = player.ShootingState;
     }
 }

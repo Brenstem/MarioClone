@@ -4,43 +4,36 @@ using UnityEngine;
 
 public class NormalState : IPowerupState
 {
+    // Private variables
     private readonly StatePatternPlayer player;
     private bool running = true;
+
+    // Properties
+    public bool Running { get { return running; } set { running = value; } }
+
+    // Constructor
     public NormalState(StatePatternPlayer p)
     {
         player = p;
     }
 
+    // Active function
     public void PowerupEffect()
     {
-        while (running)
+        while (Running) // Runs on state activation
         {
             player.GetComponent<Health>().hp = 1;
             player.GetComponent<Health>().CanDie = true;
-            player.GetComponent<Weapon>().canFire = false;
-            player.GetComponent<Transform>().localScale = new Vector2(player.GetComponent<Transform>().localScale.x, player.GetComponent<Transform>().localScale.y) / 1.5f;
+            player.GetComponent<Weapon>().CanFire = false;
+            player.GetComponent<Transform>().localScale = new Vector2(1, 1);
 
-            running = false;
+            Running = false;
         }
     }
 
-    public void ToBigPlayer()
-    {
-        player.CurrentState = player.BigState;
-    }
-
-    public void ToInvinciblePlayer()
-    {
-        player.CurrentState = player.InvincibleState;
-    }
-
+    // Not implimented from interface
     public void ToNormalPlayer()
     {
         Debug.Log("Can't transition to same state");
-    }
-
-    public void ToShootingPlayer()
-    {
-        player.CurrentState = player.ShootingState;
     }
 }

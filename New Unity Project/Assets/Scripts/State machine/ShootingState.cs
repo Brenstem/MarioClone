@@ -4,57 +4,44 @@ using UnityEngine;
 
 public class ShootingState : IPowerupState
 {
+    // Private variables
     private readonly StatePatternPlayer player;
     private float powerupLength = 10;
     private float powerupTimer;
     private bool running = true;
     private ParticleSystem ps;
 
+    // Constructor
     public ShootingState(StatePatternPlayer p)
     {
         player = p;
     }
 
-
+    // Active function
     public void PowerupEffect()
     {
         
         powerupTimer += Time.deltaTime;
 
-        while (running)
+        while (running) // Runs once on state activation
         {
-            player.GetComponent<Weapon>().canFire = true;
-            running = false;
+            player.GetComponent<Weapon>().CanFire = true;
             ps = GameObject.Instantiate(player.CanShootEffect, player.transform.position, Quaternion.identity);
+            running = false;
         }
 
         ps.transform.position = player.transform.position;
 
-        if (powerupTimer > powerupLength)
+        if (powerupTimer > powerupLength) // Exit conditions
         {
             ToNormalPlayer();
             GameObject.Destroy(ps);
         }
     }
 
-    // 
-    public void ToBigPlayer()
-    {
-        player.CurrentState = player.BigState;
-    }
-
-    public void ToInvinciblePlayer()
-    {
-        player.CurrentState = player.InvincibleState;
-    }
-
+    // Exit function
     public void ToNormalPlayer()
     {
         player.CurrentState = player.NormalState;
-    }
-
-    public void ToShootingPlayer()
-    {
-        Debug.Log("Can't transition to same state");
     }
 }
