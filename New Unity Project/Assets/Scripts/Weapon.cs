@@ -22,14 +22,6 @@ public class Weapon : MonoBehaviour
         firePosition = new Vector2(transform.position.x + xOffset, transform.position.y + yOffset);
     }
 
-    // Gizmos for the firepoint
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(firePosition, new Vector2(0.1f, 0.1f));
-    }
-
-
     // Instantiates bullets at firepoint if it's been long enough since the last shot
     public void Shoot()
     {
@@ -40,7 +32,7 @@ public class Weapon : MonoBehaviour
         {
             if (fire == 1 && fireTimer > fireRate)
             {
-                Instantiate(bulletPrefab, firePosition, transform.rotation, transform);
+                Instantiate(bulletPrefab, firePosition, transform.rotation);
                 fireTimer = 0;
             }
         }
@@ -48,7 +40,7 @@ public class Weapon : MonoBehaviour
         {
             if (fireTimer > fireRate)
             {
-                Instantiate(bulletPrefab, firePosition, transform.rotation, transform);
+                Instantiate(bulletPrefab, firePosition, transform.rotation);
                 fireTimer = 0;
             }
         }

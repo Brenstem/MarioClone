@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // Serialized variables
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
+    [SerializeField] int mDamage;
 
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] Transform groundCheck;
@@ -17,18 +18,23 @@ public class PlayerController : MonoBehaviour
 
     // Private varibales
     private Rigidbody2D rb;
+    private Weapon weapon; 
     private float moveInput;
     private float jumpInput;
-    private bool facingRight = false;
+    private bool mFacingRight;
+    public int damage { get { return mDamage; } }
+    public bool facingRight { get { return mFacingRight; } set { mFacingRight = value; } }
     private bool grounded;
 
     private float knockbackTimer;
     private bool knockedFromRight;
 
+
     // Unity functions
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        weapon = GetComponent<Weapon>();
     }
 
     private void Update()
@@ -36,6 +42,8 @@ public class PlayerController : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal") * speed;
         jumpInput = Input.GetAxisRaw("Jump");
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        weapon.Shoot();
 
         if (!facingRight && moveInput < 0)
             Flip(); 

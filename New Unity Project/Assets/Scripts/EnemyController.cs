@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
             {
                 ChangeDirection();
             }
-            else
+            else if (hitInfo.gameObject.CompareTag("Player"))
             {
                 hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
 

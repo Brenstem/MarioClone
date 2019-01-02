@@ -18,7 +18,6 @@ public class Health : MonoBehaviour
             Die();
     }
 
-
     // Kills the player by setting it's active to false or destroying it if it's not the player
     private void Die()
     {

@@ -18,7 +18,7 @@ public class NormalState : IPowerupState
 
     public void PowerupEffect()
     {
-
+        player.GetComponent<Health>().hp = 1;
     }
 
     public void PowerupExpiration()

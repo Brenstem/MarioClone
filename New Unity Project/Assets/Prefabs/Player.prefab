@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 7038418798709606340}
   - component: {fileID: 7038418798709606342}
   - component: {fileID: 5813550719544600015}
+  - component: {fileID: 8426662150753246210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   jumpForce: 3
+  mDamage: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -257,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fd4462534c890479dc958feb18d4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 50
+  healthPoints: 3
 --- !u!61 &5813550719544600015
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,3 +286,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13540973, y: 0.1118812}
   m_EdgeRadius: 0
+--- !u!114 &8426662150753246210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7038418798709606339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bbd6641901366448db0b195b5256d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xOffset: 0
+  yOffset: 0
+  bulletPrefab: {fileID: 1907546117304230, guid: 96b1c19e3ee75e2408eed6e138954c59,
+    type: 3}
+  fireRate: 0.2
+  autoFire: 0
