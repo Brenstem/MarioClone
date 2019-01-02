@@ -5,45 +5,55 @@ using UnityEngine;
 public class BigState : IPowerupState
 {
     private readonly StatePatternPlayer player;
+    private ParticleSystem ps;
+    bool running = true;
 
     public BigState(StatePatternPlayer p)
     {
         player = p;
     }
 
-    public void OnTriggerEnter2D(Collider2D hitinfo)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void PowerupEffect()
     {
-        throw new System.NotImplementedException();
+        while (running)
+        {
+            Transform pTransform = player.GetComponent<Transform>();
+
+            pTransform.localScale = new Vector2(pTransform.localScale.x, pTransform.localScale.y) * 1.5f;
+            player.GetComponent<Health>().hp = 2;
+            ps = GameObject.Instantiate(player.BigPlayerEffect, player.transform.position, Quaternion.identity);
+
+            running = false;
+        }
+
+        ps.transform.position = player.transform.position;
+
+
+        if (player.GetComponent<Health>().hp == 1)
+        {
+            ToNormalPlayer();
+            GameObject.Destroy(ps);
+        }
     }
 
-    public void PowerupExpiration()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    // 
     public void ToBigPlayer()
     {
         Debug.Log("Can't transition to same state");
     }
 
-    public void ToIncinviblePlayer()
+    public void ToInvinciblePlayer()
     {
-        player.currentState = player.invincibleState;
+        player.CurrentState = player.InvincibleState;
     }
 
     public void ToNormalPlayer()
     {
-        player.currentState = player.normalState;
+        player.CurrentState = player.NormalState;
     }
 
     public void ToShootingPlayer()
     {
-        player.currentState = player.shootingState;
+        player.CurrentState = player.ShootingState;
     }
 }

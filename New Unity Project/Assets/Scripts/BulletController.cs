@@ -16,11 +16,11 @@ public class BulletController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
 
-        if (player.facingRight)
+        if (player.FacingRight)
         {
             rb.velocity = Vector2.left;
         }
-        else if (!player.facingRight)
+        else if (!player.FacingRight)
         {
             rb.velocity = Vector2.right;
         }
@@ -39,11 +39,9 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        Debug.Log("hit");
-
         if (hitInfo.gameObject.CompareTag("Enemy"))
         {
-            hitInfo.gameObject.GetComponent<Health>().TakeDamage(player.damage);
+            hitInfo.gameObject.GetComponent<Health>().TakeDamage(player.Damage);
         }
         else
         {

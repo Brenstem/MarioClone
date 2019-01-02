@@ -4,32 +4,64 @@ using UnityEngine;
 
 public class StatePatternPlayer : MonoBehaviour
 {
-    public IPowerupState currentState { get { return currentState; } set { currentState = value; } }
-    public BigState bigState { get { return bigState; } set { bigState = value; } }
-    public NormalState normalState { get { return normalState; } set { normalState = value; } }
-    public ShootingState shootingState { get { return shootingState; } set { shootingState = value; } }
-    public InvincibleState invincibleState { get { return invincibleState; } set { invincibleState = value; } }
+    public ParticleSystem BigPlayerEffect;
+    public ParticleSystem InvincibleEffect;
+    public ParticleSystem CanShootEffect;
+
+    private IPowerupState mCurrentState;
+    public IPowerupState CurrentState { get { return mCurrentState; } set { mCurrentState = value; } }
+    private BigState mBigState;
+    public BigState BigState { get { return mBigState; } set { mBigState = value; } }
+    private NormalState mNormalState;
+    public NormalState NormalState { get { return mNormalState; } set { mNormalState = value; } }
+    private ShootingState mShootingState;
+    public ShootingState ShootingState { get { return mShootingState; } set { mShootingState = value; } }
+    private InvincibleState mInvincibleState;
+    public InvincibleState InvincibleState { get { return mInvincibleState; } set { mInvincibleState = value; } }
+
+    [HideInInspector] public float initXSize;
+    [HideInInspector] public float initYSize;
 
     private void Awake()
     {
-        normalState = new NormalState(this);
-        bigState = new BigState(this);
-        shootingState = new ShootingState(this);
-        invincibleState = new InvincibleState(this);
+        NormalState = new NormalState(this);
+        BigState = new BigState(this);
+        ShootingState = new ShootingState(this);
+        InvincibleState = new InvincibleState(this);
     }
 
     private void Start()
     {
-        currentState = normalState;
+        GetComponent<Transform>().localScale = new Vector2(GetComponent<Transform>().localScale.x, GetComponent<Transform>().localScale.y) * 1.5f;
+
+        initXSize = GetComponent<Transform>().localScale.x;
+        initYSize = GetComponent<Transform>().localScale.y;
+
+        CurrentState = NormalState;
     }
 
     private void Update()
     {
-        currentState.PowerupEffect();
+        CurrentState.PowerupEffect();
     }
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
+    public void ToBigPlayer()
     {
-        currentState.OnTriggerEnter2D(hitInfo);
+        CurrentState = BigState;
+    }
+
+    public void ToInvinciblePlayer()
+    {
+        CurrentState = InvincibleState;
+    }
+
+    public void ToNormalPlayer()
+    {
+        CurrentState = NormalState;
+    }
+
+    public void ToShootingPlayer()
+    {
+        CurrentState = ShootingState;
     }
 }

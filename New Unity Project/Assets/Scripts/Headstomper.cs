@@ -5,12 +5,14 @@ using UnityEngine;
 public class Headstomper : MonoBehaviour
 {
     [SerializeField] int damage;
+    [SerializeField] float force;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Health>().TakeDamage(damage);
+            transform.parent.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.parent.GetComponent<Rigidbody2D>().velocity.x, force);
         }
     }
 }

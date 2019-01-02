@@ -5,45 +5,58 @@ using UnityEngine;
 public class InvincibleState : IPowerupState
 {
     private readonly StatePatternPlayer player;
+    private bool running = true;
+    private ParticleSystem ps;
+    private float powerupTimer;
+    private int powerupLength = 5;
 
     public InvincibleState(StatePatternPlayer p)
     {
         player = p;
     }
 
-    public void OnTriggerEnter2D(Collider2D hitinfo)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void PowerupEffect()
     {
-        throw new System.NotImplementedException();
+        powerupTimer += Time.deltaTime;
+
+        while (running)
+        {
+            player.GetComponent<Health>().CanDie = false;
+            ps = GameObject.Instantiate(player.InvincibleEffect, player.transform.position, Quaternion.identity);
+            running = false;
+        }
+
+        ps.transform.position = player.transform.position;
+
+        if (powerupTimer > powerupLength)
+        {
+            ToNormalPlayer();
+            GameObject.Destroy(ps);
+        }
     }
 
     public void PowerupExpiration()
     {
-        throw new System.NotImplementedException();
+
     }
 
-    // 
     public void ToBigPlayer()
     {
-        player.currentState = player.bigState;
+        player.CurrentState = player.BigState;
     }
 
-    public void ToIncinviblePlayer()
+    public void ToInvinciblePlayer()
     {
         Debug.Log("Can't transition to same state");
     }
 
     public void ToNormalPlayer()
     {
-        player.currentState = player.normalState;
+        player.CurrentState = player.NormalState;
     }
 
     public void ToShootingPlayer()
     {
-        player.currentState = player.shootingState;
+        player.CurrentState = player.ShootingState;
     }
 }

@@ -5,41 +5,52 @@ using UnityEngine;
 public class ShootingState : IPowerupState
 {
     private readonly StatePatternPlayer player;
+    private float powerupLength = 10;
+    private float powerupTimer;
+    private bool running = true;
+    private ParticleSystem ps;
 
     public ShootingState(StatePatternPlayer p)
     {
         player = p;
     }
 
-    public void OnTriggerEnter2D(Collider2D hitinfo)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void PowerupEffect()
     {
-        throw new System.NotImplementedException();
-    }
+        
+        powerupTimer += Time.deltaTime;
 
-    public void PowerupExpiration()
-    {
-        throw new System.NotImplementedException();
+        while (running)
+        {
+            player.GetComponent<Weapon>().canFire = true;
+            running = false;
+            ps = GameObject.Instantiate(player.CanShootEffect, player.transform.position, Quaternion.identity);
+        }
+
+        ps.transform.position = player.transform.position;
+
+        if (powerupTimer > powerupLength)
+        {
+            ToNormalPlayer();
+            GameObject.Destroy(ps);
+        }
     }
 
     // 
     public void ToBigPlayer()
     {
-        player.currentState = player.bigState;
+        player.CurrentState = player.BigState;
     }
 
-    public void ToIncinviblePlayer()
+    public void ToInvinciblePlayer()
     {
-        player.currentState = player.invincibleState;
+        player.CurrentState = player.InvincibleState;
     }
 
     public void ToNormalPlayer()
     {
-        player.currentState = player.normalState;
+        player.CurrentState = player.NormalState;
     }
 
     public void ToShootingPlayer()

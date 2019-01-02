@@ -6,15 +6,11 @@ public interface IPowerupState
 {
     void PowerupEffect();
 
-    void PowerupExpiration();
-
-    void OnTriggerEnter2D(Collider2D hitinfo);
-
     void ToNormalPlayer();
 
     void ToBigPlayer();
 
     void ToShootingPlayer();
 
-    void ToIncinviblePlayer();
+    void ToInvinciblePlayer();
 }

@@ -5,36 +5,33 @@ using UnityEngine;
 public class NormalState : IPowerupState
 {
     private readonly StatePatternPlayer player;
-
+    private bool running = true;
     public NormalState(StatePatternPlayer p)
     {
         player = p;
     }
 
-    public void OnTriggerEnter2D(Collider2D hitinfo)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void PowerupEffect()
     {
-        player.GetComponent<Health>().hp = 1;
+        while (running)
+        {
+            player.GetComponent<Health>().hp = 1;
+            player.GetComponent<Health>().CanDie = true;
+            player.GetComponent<Weapon>().canFire = false;
+            player.GetComponent<Transform>().localScale = new Vector2(player.GetComponent<Transform>().localScale.x, player.GetComponent<Transform>().localScale.y) / 1.5f;
+
+            running = false;
+        }
     }
 
-    public void PowerupExpiration()
-    {
-
-    }
-
-    // 
     public void ToBigPlayer()
     {
-        player.currentState = player.bigState;
+        player.CurrentState = player.BigState;
     }
 
-    public void ToIncinviblePlayer()
+    public void ToInvinciblePlayer()
     {
-        player.currentState = player.invincibleState;
+        player.CurrentState = player.InvincibleState;
     }
 
     public void ToNormalPlayer()
@@ -44,6 +41,6 @@ public class NormalState : IPowerupState
 
     public void ToShootingPlayer()
     {
-        player.currentState = player.shootingState;
+        player.CurrentState = player.ShootingState;
     }
 }

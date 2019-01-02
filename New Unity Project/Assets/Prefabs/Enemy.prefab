@@ -40,11 +40,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7852147142562002709}
   - component: {fileID: 7852147142562002708}
-  - component: {fileID: 7852147142562002711}
   - component: {fileID: 7852147142562002710}
+  - component: {fileID: 7852147142562002711}
+  - component: {fileID: 1124241995396814639}
   - component: {fileID: 7852147142562002713}
   - component: {fileID: 1881511639}
-  - component: {fileID: 1124241995396814639}
+  - component: {fileID: 7852147142295822800}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -115,22 +116,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &7852147142562002711
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7852147142562002712}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.019268602}
-  serializedVersion: 2
-  m_Radius: 0.09219
 --- !u!50 &7852147142562002710
 Rigidbody2D:
   serializedVersion: 4
@@ -152,38 +137,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7852147142562002713
-MonoBehaviour:
+--- !u!58 &7852147142562002711
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7852147142562002712}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc8b63cf2e8a744d8db35d583f70570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.44
-  damage: 1
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 256
-  wallCheck: {fileID: 1411009161}
-  wallCheckRadius: 0.5
---- !u!114 &1881511639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7852147142562002712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88fd4462534c890479dc958feb18d4f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoints: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.014639117}
+  serializedVersion: 2
+  m_Radius: 0.09618196
 --- !u!61 &1124241995396814639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -210,3 +179,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.06}
   m_EdgeRadius: 0
+--- !u!114 &7852147142562002713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852147142562002712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc8b63cf2e8a744d8db35d583f70570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.44
+  damage: 1
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 256
+  wallCheck: {fileID: 1411009161}
+  wallCheckRadius: 0.05
+--- !u!114 &1881511639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852147142562002712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fd4462534c890479dc958feb18d4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 1
+--- !u!114 &7852147142295822800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852147142562002712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bbd6641901366448db0b195b5256d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  fireRate: 0
+  autoFire: 0

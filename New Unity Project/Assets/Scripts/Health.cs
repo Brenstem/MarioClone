@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
 {
     // Inpsector variables
     [SerializeField] int healthPoints;
+    private bool mCanDie = true ;
+    public bool CanDie { get { return mCanDie; } set { mCanDie = value; } }
 
     // Properties
     public int hp { get { return healthPoints; } set { healthPoints = value; } }
@@ -14,7 +16,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
-        if (hp <= 0)
+        if (hp <= 0 && CanDie)
             Die();
     }
 
