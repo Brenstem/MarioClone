@@ -47,23 +47,26 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.gameObject.CompareTag("Wall"))
+        if (hitInfo != null)
         {
-            ChangeDirection();
-        }
-        else
-        {
-            hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
+            if (hitInfo.gameObject.CompareTag("Wall"))
+            {
+                ChangeDirection();
+            }
+            else
+            {
+                hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
 
-            if (hitInfo.transform.position.x < transform.position.x)
-            {
-                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(true);
+                if (hitInfo.transform.position.x < transform.position.x)
+                {
+                    hitInfo.gameObject.GetComponent<PlayerController>().Knockback(true);
+                }
+                else if (hitInfo.transform.position.x > transform.position.x)
+                {
+                    hitInfo.gameObject.GetComponent<PlayerController>().Knockback(false);
+                }
             }
-            else if (hitInfo.transform.position.x > transform.position.x)
-            {
-                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(false);
-            }
-        }
+        }  
     }
 
     // Private functions
