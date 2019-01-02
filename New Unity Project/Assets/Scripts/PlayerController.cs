@@ -6,11 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     // Serialized variables
     [SerializeField] float speed;
-    [SerializeField] int damage;
     [SerializeField] float jumpForce;
+
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius;
+
+    [SerializeField] float knockbackForce;
+    [SerializeField] float knockbackLength;
 
     // Private varibales
     private Rigidbody2D rb;
@@ -18,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private float jumpInput;
     private bool facingRight = false;
     private bool grounded;
+
+    private float knockbackTimer;
+    private bool knockedFromRight;
 
     // Unity functions
     private void Start()
@@ -40,18 +46,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput, rb.velocity.y);
+        if (knockbackTimer <= 0)
+        {
+            rb.velocity = new Vector2(moveInput, rb.velocity.y);
+        }
+        else
+        {
+            if (knockedFromRight)
+            {
+                rb.velocity = new Vector2(-knockbackForce, knockbackForce);
+            }
+            else if (!knockedFromRight)
+            {
+                rb.velocity = new Vector2(knockbackForce, knockbackForce);
+            }
+            knockbackTimer -= Time.deltaTime;
+        }
 
         if (jumpInput == 1 && grounded)
             rb.velocity = Vector2.up * jumpForce;
-    }
-
-    private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        if (hitInfo.gameObject.CompareTag("Enemy"))
-        {
-            hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
-        }
     }
 
     // Private functions
@@ -61,5 +74,12 @@ public class PlayerController : MonoBehaviour
         Vector2 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+    }
+
+    // Public functions
+    public void Knockback(bool _knockedFromRight)
+    {
+        knockbackTimer = knockbackLength;
+        knockedFromRight = _knockedFromRight;
     }
 }

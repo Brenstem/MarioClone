@@ -7,11 +7,15 @@ public class EnemyController : MonoBehaviour
     // Serialize variables
     [SerializeField] float speed;
     [SerializeField] int damage;
+    [SerializeField] LayerMask whatIsWall;
+    [SerializeField] Transform wallCheck;
+    [SerializeField] float wallCheckRadius;
 
     // Private variables
     private Rigidbody2D rb;
     private float moveDir;
     private bool facingRight;
+    private bool hittingWall;
 
     // Unity functions
     void Start()
@@ -22,6 +26,13 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        hittingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
+
+        if (hittingWall)
+        {
+            ChangeDirection();
+        }
+
         if (!facingRight && moveDir > 0)
             Flip();
 
@@ -34,7 +45,7 @@ public class EnemyController : MonoBehaviour
         rb.velocity = new Vector2(moveDir * speed, rb.velocity.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.gameObject.CompareTag("Wall"))
         {
@@ -43,6 +54,15 @@ public class EnemyController : MonoBehaviour
         else
         {
             hitInfo.gameObject.GetComponent<Health>().TakeDamage(damage);
+
+            if (hitInfo.transform.position.x < transform.position.x)
+            {
+                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(true);
+            }
+            else if (hitInfo.transform.position.x > transform.position.x)
+            {
+                hitInfo.gameObject.GetComponent<PlayerController>().Knockback(false);
+            }
         }
     }
 

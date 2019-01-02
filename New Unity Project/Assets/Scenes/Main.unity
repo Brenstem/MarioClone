@@ -277,8 +277,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.13, y: 0.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -575,25 +575,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1756100623}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1881511638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7852147142562002712, guid: 50f93bbee6c93554292b8a495e775490,
-    type: 3}
-  m_PrefabInstance: {fileID: 7852147142295822798}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1881511639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881511638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88fd4462534c890479dc958feb18d4f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoints: 1
 --- !u!1001 &3465183931379659779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -688,12 +669,12 @@ PrefabInstance:
     - target: {fileID: 7852147142562002709, guid: 50f93bbee6c93554292b8a495e775490,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.073
       objectReference: {fileID: 0}
     - target: {fileID: 7852147142562002709, guid: 50f93bbee6c93554292b8a495e775490,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.084
       objectReference: {fileID: 0}
     - target: {fileID: 7852147142562002709, guid: 50f93bbee6c93554292b8a495e775490,
         type: 3}
@@ -742,12 +723,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7852147142562002713, guid: 50f93bbee6c93554292b8a495e775490,
         type: 3}
-      propertyPath: speed
-      value: 0.44
+      propertyPath: wallCheckRadius
+      value: 0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 7852147142562002713, guid: 50f93bbee6c93554292b8a495e775490,
-        type: 3}
-      propertyPath: damage
+    - target: {fileID: 1881511639, guid: 50f93bbee6c93554292b8a495e775490, type: 3}
+      propertyPath: healthPoints
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7852147142562002711, guid: 50f93bbee6c93554292b8a495e775490,
@@ -787,12 +767,12 @@ PrefabInstance:
     - target: {fileID: 4542042142613017065, guid: b2eacb4024c196f4dbe9d5af5d44b707,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.087
+      value: -1.025
       objectReference: {fileID: 0}
     - target: {fileID: 4542042142613017065, guid: b2eacb4024c196f4dbe9d5af5d44b707,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4542042142613017065, guid: b2eacb4024c196f4dbe9d5af5d44b707,
         type: 3}
