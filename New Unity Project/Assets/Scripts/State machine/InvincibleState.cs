@@ -42,6 +42,6 @@ public class InvincibleState : IPowerupState
     // Return function
     public void ToNormalPlayer()
     {
-        player.CurrentState = player.NormalState;
+        player.CurrentState = player.NormalState; 
     }
 }

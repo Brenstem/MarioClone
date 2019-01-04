@@ -42,7 +42,7 @@ public class BulletController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
+    { 
         if (hitInfo.gameObject.CompareTag("Enemy"))
         {
             hitInfo.gameObject.GetComponent<Health>().TakeDamage(player.BulletDamage);
